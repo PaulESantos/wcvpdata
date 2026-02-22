@@ -25,4 +25,10 @@ wgsrpd3_pacific
 \description{
 Spatial data for WGSRPD Level 3, for plotting maps
 }
+\examples{
+if (requireNamespace("sf", quietly = TRUE)) {
+    data(wgsrpd3_pacific)
+    plot(sf::st_geometry(wgsrpd3_pacific))
+}
+}
 \keyword{datasets}

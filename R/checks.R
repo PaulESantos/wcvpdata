@@ -4,6 +4,8 @@
 #'
 #' @param long Whether to return the version date with version number.
 #'
+#' @return A character string containing the version and date.
+#'
 #' @importFrom glue glue
 #'
 #' @export
@@ -11,11 +13,11 @@
 #' @examples
 #' wcvp_version()
 #'
-wcvp_version <- function(long=TRUE) {
+wcvp_version <- function(long = TRUE) {
   if (long) {
     glue::glue("Version {metadata$version} ({metadata$version_date})")
   } else {
-    metadata$version
+    as.character(metadata$version)
   }
 }
 
@@ -24,21 +26,25 @@ wcvp_version <- function(long=TRUE) {
 #'
 #' @param silent Raise a warning if the version is out of date.
 #'
+#' @return A logical value; TRUE if the packaged version is up to date,
+#'   FALSE otherwise.
+#'
+#' @importFrom cli cli_warn
 #' @export
 #'
 #' @examples
 #' wcvp_check_version()
 #'
-wcvp_check_version <- function(silent=FALSE) {
+wcvp_check_version <- function(silent = FALSE) {
   latest_date <- get_upload_date_()
   up_to_date <- latest_date == metadata$upload_date
 
-  if (! silent & ! up_to_date) {
-    msg <- glue::glue("WCVP data not the most recent version!",
-                      "Using {wcvp_version()} uploaded on {metadata$upload_date}.",
-                      "Latest version was uploaded on {latest_date}.",
-                      .sep="\n")
-    warning(msg)
+  if (!silent && !up_to_date) {
+    cli::cli_warn(c(
+      "WCVP data not the most recent version!",
+      "i" = "Using {wcvp_version()} uploaded on {.val {metadata$upload_date}}.",
+      "i" = "Latest version was uploaded on {.val {latest_date}}."
+    ))
   }
 
   up_to_date

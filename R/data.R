@@ -88,7 +88,11 @@
 #'   ...
 #' }
 #' @source \url{http://sftp.kew.org/pub/data-repositories/WCVP/wcvp.zip}
-
+#' @examples
+#' \donttest{
+#' data(wcvp_names)
+#' head(wcvp_names)
+#' }
 "wcvp_names"
 
 #' The World Checklist of Vascular Plants: distributions
@@ -112,7 +116,11 @@
 #'   \item{location_doubtful}{1 if doubtful; 0 otherwise}
 #' }
 #' @source \url{http://sftp.kew.org/pub/data-repositories/WCVP/wcvp.zip}
-
+#' @examples
+#' \donttest{
+#' data(wcvp_distributions)
+#' head(wcvp_distributions)
+#' }
 "wcvp_distributions"
 
 
@@ -132,7 +140,11 @@
 #'   }
 #'
 #' @source  \url{https://github.com/tdwg/wgsrpd/tree/master/level3}
-
+#' @examples
+#' if (requireNamespace("sf", quietly = TRUE)) {
+#'     data(wgsrpd3)
+#'     plot(sf::st_geometry(wgsrpd3))
+#' }
 "wgsrpd3"
 
 #' Aggregated WGSRPD3 polygons, for mapping
@@ -142,7 +154,11 @@
 #' @format An 'sf_MULTIPOLYGON' object.
 #'
 #' @source Aggregated from: \url{https://github.com/tdwg/wgsrpd/tree/master/level3}
-
+#' @examples
+#' if (requireNamespace("sf", quietly = TRUE)) {
+#'     data(coast)
+#'     plot(sf::st_geometry(coast))
+#' }
 "coast"
 
 #' Biodiversity Information Standards (TDWG) World Geographical Scheme for
@@ -161,7 +177,11 @@
 #' }
 #'
 #' @source  \url{https://github.com/tdwg/wgsrpd/tree/master/level3}
-
+#' @examples
+#' if (requireNamespace("sf", quietly = TRUE)) {
+#'     data(wgsrpd3_pacific)
+#'     plot(sf::st_geometry(wgsrpd3_pacific))
+#' }
 "wgsrpd3_pacific"
 
 #' Aggregated WGSRPD3 polygons centered on 180 longitude, for mapping
@@ -171,5 +191,9 @@
 #' @format An 'sf_MULTIPOLYGON' object.
 #'
 #' @source Aggregated from: \url{https://github.com/tdwg/wgsrpd/tree/master/level3}
-
+#' @examples
+#' if (requireNamespace("sf", quietly = TRUE)) {
+#'     data(coast_pacific)
+#'     plot(sf::st_geometry(coast_pacific))
+#' }
 "coast_pacific"

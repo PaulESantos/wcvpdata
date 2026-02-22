@@ -10,6 +10,9 @@ wcvp_version(long = TRUE)
 \arguments{
 \item{long}{Whether to return the version date with version number.}
 }
+\value{
+A character string containing the version and date.
+}
 \description{
 Functions to help check the WCVP data is okay and up to date.
 View the version of WCVP available.

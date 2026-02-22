@@ -16,4 +16,10 @@ coast
 \description{
 Spatial data from WGSRPD Level 3, for plotting maps
 }
+\examples{
+if (requireNamespace("sf", quietly = TRUE)) {
+    data(coast)
+    plot(sf::st_geometry(coast))
+}
+}
 \keyword{datasets}

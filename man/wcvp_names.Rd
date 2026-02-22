@@ -100,4 +100,10 @@ wcvp_names
 \description{
 A dataset containing the taxonomic data from the WCVP.
 }
+\examples{
+\donttest{
+data(wcvp_names)
+head(wcvp_names)
+}
+}
 \keyword{datasets}

@@ -31,4 +31,10 @@ A dataset containing the distribution data from the WCVP, mapped to the
 Biodiversity Information Standards (TDWG) World Geographical Scheme for
 Recording Plant Distributions (WGSRPD)
 }
+\examples{
+\donttest{
+data(wcvp_distributions)
+head(wcvp_distributions)
+}
+}
 \keyword{datasets}

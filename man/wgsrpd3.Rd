@@ -25,4 +25,10 @@ wgsrpd3
 \description{
 Spatial data for WGSRPD Level 3, for plotting maps
 }
+\examples{
+if (requireNamespace("sf", quietly = TRUE)) {
+    data(wgsrpd3)
+    plot(sf::st_geometry(wgsrpd3))
+}
+}
 \keyword{datasets}
