@@ -2,6 +2,8 @@
 
 #' View the version of WCVP available.
 #'
+#' `r lifecycle::badge("stable")`
+#'
 #' @param long Whether to return the version date with version number.
 #'
 #' @return A character string containing the version and date.
@@ -24,6 +26,8 @@ wcvp_version <- function(long = TRUE) {
 
 #' Check if the packaged version of WCVP is up to date.
 #'
+#' `r lifecycle::badge("stable")`
+#'
 #' @param silent Raise a warning if the version is out of date.
 #'
 #' @return A logical value; TRUE if the packaged version is up to date,
@@ -36,7 +40,15 @@ wcvp_version <- function(long = TRUE) {
 #' wcvp_check_version()
 #'
 wcvp_check_version <- function(silent = FALSE) {
-  latest_date <- get_upload_date_()
+  latest_date <- wcvp_get_upload_date()
+
+  if (is.null(latest_date)) {
+    if (!silent) {
+      cli::cli_warn("Could not check for latest WCVP version (offline or server error).")
+    }
+    return(invisible(NULL))
+  }
+
   up_to_date <- latest_date == metadata$upload_date
 
   if (!silent && !up_to_date) {

@@ -1,42 +1,44 @@
 core <- c(
-    "rWCVPdata",
-    "rWCVP"
+    "wcvpdata"
 )
 
-core_unloaded <- function() {
+wcvp_core_unloaded <- function() {
     search <- paste0("package:", core)
     core[!search %in% search()]
 }
 
 # Attach the package from the same package library it was
 # loaded from before.
-same_library <- function(pkg) {
+wcvp_same_library <- function(pkg) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+        return(invisible())
+    }
     loc <- if (pkg %in% loadedNamespaces()) dirname(getNamespaceInfo(pkg, "path"))
     library(pkg, lib.loc = loc, character.only = TRUE, warn.conflicts = FALSE)
 }
 
-rwc_attach <- function() {
-    to_load <- core_unloaded()
+wcvp_attach <- function() {
+    to_load <- wcvp_core_unloaded()
 
     suppressPackageStartupMessages(
-        lapply(to_load, same_library)
+        lapply(to_load, wcvp_same_library)
     )
 
     invisible(to_load)
 }
 
-rwc_attach_message <- function(to_load) {
+wcvp_attach_message <- function(to_load) {
     if (length(to_load) == 0) {
         return(NULL)
     }
 
     header <- cli::rule(
-        left = cli::style_bold("Attaching rWCVPdata ecosystem"),
-        right = paste0("rWCVPdata ", package_version_h("rWCVPdata"))
+        left = cli::style_bold("Attaching wcvpdata ecosystem"),
+        right = paste0("wcvpdata ", wcvp_package_version_h("wcvpdata"))
     )
 
     to_load <- sort(to_load)
-    versions <- vapply(to_load, package_version_h, character(1))
+    versions <- vapply(to_load, wcvp_package_version_h, character(1))
 
     packages <- paste0(
         cli::col_green(cli::symbol$tick),
@@ -55,14 +57,14 @@ rwc_attach_message <- function(to_load) {
     paste0(header, "\n", paste(info, collapse = "\n"))
 }
 
-package_version_h <- function(pkg) {
+wcvp_package_version_h <- function(pkg) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
         return(cli::col_red("(not installed)"))
     }
-    highlight_version(utils::packageVersion(pkg))
+    wcvp_highlight_version(utils::packageVersion(pkg))
 }
 
-highlight_version <- function(x) {
+wcvp_highlight_version <- function(x) {
     x <- as.character(x)
 
     is_dev <- function(x) {

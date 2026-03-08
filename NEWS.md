@@ -1,4 +1,4 @@
-# rWCVPdata 0.5.0
+# wcvpdata 0.5.0
 
 * Prepared package for CRAN submission.
 * Added `@return` documentation to all exported functions.

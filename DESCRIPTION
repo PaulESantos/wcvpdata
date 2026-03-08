@@ -1,33 +1,39 @@
-Package: rWCVPdata
+Package: wcvpdata
 Type: Package
-Title: Data from the 'World Checklist of Vascular Plants'
-Version: 0.8.0
-Authors@R: c(person("Matilda","Brown",,"m.brown2@kew.org",role=c("aut","cre","cph")),
-             person("Barnaby","Walker",,"b.walker@kew.org",role=c("aut")))
-Maintainer: Matilda Brown <m.brown2@kew.org>
-Description: Distributes snapshots of the 'World Checklist of Vascular Plants'
-    (WCVP) database. Designed to be used in conjunction with the 'rWCVP' 
-    package for taxonomic and distributional analysis. Provides essential 
-    data for vascular plant research locally in 'R'.
+Title: World Checklist of Vascular Plants Data
+Version: 0.5.0
+Authors@R: c(person(given = "Paul E.",
+                    family = "Santos Andrade",
+                    role = c("aut", "cre", "cph"),
+                    email = "paulefrens@gmail.com",
+                    comment = c(ORCID = "0000-0002-6635-0375")))
+Maintainer: Paul E. Santos Andrade <paulefrens@gmail.com>
+Description: Provides a local interface to the 'World Checklist of Vascular
+    Plants' (WCVP) <https://powo.science.kew.org/about-wcvp> (Version 15,
+    January 2026), sourced from 'Plants of the World Online'
+    <https://powo.science.kew.org/>. Bundles standardized snapshots of global
+    taxonomic and geographic distribution data for vascular plants, designed
+    to support large-scale botanical research and biodiversity analysis
+    directly in 'R'.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
-RoxygenNote: 7.3.3
-Imports: 
+Depends:
+    R (>= 4.1)
+Imports:
     cli,
+    curl,
     glue,
     httr,
+    lifecycle,
     rvest,
     stringr
-Depends: 
-    R (>= 4.1)
-Roxygen: list(markdown = TRUE)
-Suggests: 
-    sf,
+Suggests:
     testthat (>= 3.3.2),
     withr
-Additional_repositories: https://cloud.r-project.org
 Config/testthat/edition: 3
-URL: https://matildabrown.github.io/rWCVPdata/
-BugReports: https://github.com/matildabrown/rWCVPdata/issues
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+URL: https://github.com/PaulESantos/wcvpdata
+BugReports: https://github.com/PaulESantos/wcvpdata/issues

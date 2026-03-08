@@ -14,7 +14,7 @@ A logical value; TRUE if the packaged version is up to date,
 FALSE otherwise.
 }
 \description{
-Check if the packaged version of WCVP is up to date.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \examples{
 wcvp_check_version()

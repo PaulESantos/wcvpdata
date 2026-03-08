@@ -1,51 +1,34 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rWCVPdata
+# wcvpdata
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/matildabrown/rWCVPdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/matildabrown/rWCVPdata/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/PaulESantos/wcvpdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/wcvpdata/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-rWCVPdata is a data package that redistributes snapshots of the World
+wcvpdata is a data package that redistributes snapshots of the World
 Checklist of Vascular Plants (WCVP) database so it is easier to load
 into R.
 
 ## Installation
 
-You can install the released version of rWCVPdata from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("rWCVPdata")
-```
-
-Or you can add our data repository to your repo list first:
-
-``` r
-r <- getOption("repos")
-r["matildabrown"] <- "https://matildabrown.github.io/drat"
-options(repos=r)
-
-install.packages("rWCVPdata")
-```
-
-You can install the latest development version of rWCVPdata from
+You can install the latest development version of wcvpdata from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("matildabrown/rWCVPdata")
+# install.packages("pak")
+pak::pak("PaulESantos/wcvpdata")
 ```
 
 ## Citation
 
-If you use rWCVPdata, please cite the snapshot of the database you used
+If you use wcvpdata, please cite the snapshot of the database you used
 and the paper describing WCVP.
 
 You can find out how to cite these by running:
 
 ``` r
-citation("rWCVPdata")
+citation("wcvpdata")
 ```

@@ -1,6 +1,6 @@
 ## Submission Summary
 
-This is the first submission of 'rWCVPdata' to CRAN.
+This is the first submission of 'wcvpdata' to CRAN.
 
 ## Test environments
 * local Windows installation, R 4.4.0 (pre-recorded)

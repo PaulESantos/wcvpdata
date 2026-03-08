@@ -1,28 +1,30 @@
 #' Startup hook
 #' @noRd
 .onAttach <- function(...) {
-    if (is_loading_for_tests()) {
+    if (wcvp_is_loading_for_tests()) {
         return(invisible())
     }
 
-    attached <- rwc_attach()
-    inform_startup(rwc_attach_message(attached))
+    attached <- wcvp_attach()
+    wcvp_inform_startup(wcvp_attach_message(attached))
 }
 
-is_attached <- function(x) {
+wcvp_is_attached <- function(x) {
     paste0("package:", x) %in% search()
 }
 
-is_loading_for_tests <- function() {
-    !interactive() && identical(Sys.getenv("DEVTOOLS_LOAD"), "rWCVPdata")
+wcvp_is_loading_for_tests <- function() {
+    !interactive() && identical(Sys.getenv("DEVTOOLS_LOAD"), "wcvpdata")
 }
 
-inform_startup <- function(msg) {
+wcvp_inform_startup <- function(msg) {
     if (is.null(msg)) {
         return()
     }
-    if (is_attached("conflicted")) {
+    if (wcvp_is_attached("conflicted")) {
         return()
     }
     packageStartupMessage(msg)
 }
+
+utils::globalVariables("metadata")

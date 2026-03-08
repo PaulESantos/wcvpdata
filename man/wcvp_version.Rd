@@ -14,8 +14,7 @@ wcvp_version(long = TRUE)
 A character string containing the version and date.
 }
 \description{
-Functions to help check the WCVP data is okay and up to date.
-View the version of WCVP available.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \examples{
 wcvp_version()

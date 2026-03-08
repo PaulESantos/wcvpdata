@@ -1,4 +1,4 @@
 library(testthat)
-library(rWCVPdata)
+library(wcvpdata)
 
-test_check("rWCVPdata")
+test_check("wcvpdata")
