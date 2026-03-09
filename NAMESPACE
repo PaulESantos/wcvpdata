@@ -2,6 +2,7 @@
 
 export(wcvp_check_version)
 export(wcvp_version)
+importFrom(cli,cli_inform)
 importFrom(cli,cli_warn)
 importFrom(glue,glue)
 importFrom(lifecycle,deprecated)

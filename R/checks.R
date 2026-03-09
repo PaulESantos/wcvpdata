@@ -28,12 +28,12 @@ wcvp_version <- function(long = TRUE) {
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' @param silent Raise a warning if the version is out of date.
+#' @param silent Suppress all messages and warnings.
 #'
 #' @return A logical value; TRUE if the packaged version is up to date,
 #'   FALSE otherwise.
 #'
-#' @importFrom cli cli_warn
+#' @importFrom cli cli_warn cli_inform
 #' @export
 #'
 #' @examples
@@ -41,23 +41,26 @@ wcvp_version <- function(long = TRUE) {
 #'
 wcvp_check_version <- function(silent = FALSE) {
   latest_date <- wcvp_get_upload_date()
-
   if (is.null(latest_date)) {
     if (!silent) {
       cli::cli_warn("Could not check for latest WCVP version (offline or server error).")
     }
     return(invisible(NULL))
   }
-
   up_to_date <- latest_date == metadata$upload_date
-
-  if (!silent && !up_to_date) {
-    cli::cli_warn(c(
-      "WCVP data not the most recent version!",
-      "i" = "Using {wcvp_version()} uploaded on {.val {metadata$upload_date}}.",
-      "i" = "Latest version was uploaded on {.val {latest_date}}."
-    ))
+  if (!silent) {
+    if (up_to_date) {
+      cli::cli_inform(c(
+        "v" = "WCVP data is up to date.",
+        "i" = "Current version: {wcvp_version()}, uploaded on {.val {metadata$upload_date}}."
+      ))
+    } else {
+      cli::cli_warn(c(
+        "!" = "WCVP data is not the most recent version.",
+        "i" = "Using {wcvp_version()} uploaded on {.val {metadata$upload_date}}.",
+        "i" = "Latest version was uploaded on {.val {latest_date}}."
+      ))
+    }
   }
-
-  up_to_date
+  invisible(up_to_date)
 }

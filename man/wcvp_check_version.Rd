@@ -7,7 +7,7 @@
 wcvp_check_version(silent = FALSE)
 }
 \arguments{
-\item{silent}{Raise a warning if the version is out of date.}
+\item{silent}{Suppress all messages and warnings.}
 }
 \value{
 A logical value; TRUE if the packaged version is up to date,
