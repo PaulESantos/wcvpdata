@@ -15,9 +15,22 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/PaulESantos/wcvpdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/wcvpdata/actions/workflows/R-CMD-check.yaml)
+[![R-universe](https://PaulESantos.r-universe.dev/badges/wcvpdata)](https://PaulESantos.r-universe.dev/wcvpdata)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-wcvpdata is a data package that redistributes snapshots of the World Checklist of Vascular Plants (WCVP) database so it is easier to load into R.
+## Overview
+
+`wcvpdata` provides a local R interface to the **World Checklist of
+Vascular Plants (WCVP)**, a comprehensive global database of accepted
+plant names and their synonyms maintained by the Royal Botanic Gardens,
+Kew. This package bundles standardized snapshots of the WCVP taxonomic
+and geographic distribution data (Version 15, January 2026), enabling
+large-scale botanical research and biodiversity analysis directly in R
+— without requiring repeated downloads or internet access.
+
+<invoke name="25-1">The WCVP database was initiated in 1988 by Rafaël Govaerts and has grown into an **international collaborative programme** with editors,
+compilers, and reviewers from around the globe.
 
 ## Installation
 
@@ -26,13 +39,25 @@ You can install the latest development version of wcvpdata from [GitHub](https:/
 ``` r
 # install.packages("pak")
 pak::pak("PaulESantos/wcvpdata")
+
+# From r-universe
+install.packages("wcvpdata",
+  repos = c(
+    "https://paulesantos.r-universe.dev",
+    "https://cloud.r-project.org"
+  )
+)
 ```
+
+
 
 ## Citation
 
 If you use wcvpdata, please cite the snapshot of the database you used and the paper describing WCVP.
 
 You can find out how to cite these by running:
-``` r
-citation("wcvpdata")
+```{r}
+print(citation("wcvpdata"), bibtex=TRUE)
 ```
+
+

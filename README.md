@@ -6,11 +6,24 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/PaulESantos/wcvpdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/wcvpdata/actions/workflows/R-CMD-check.yaml)
+[![R-universe](https://PaulESantos.r-universe.dev/badges/wcvpdata)](https://PaulESantos.r-universe.dev/wcvpdata)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-wcvpdata is a data package that redistributes snapshots of the World
-Checklist of Vascular Plants (WCVP) database so it is easier to load
-into R.
+## Overview
+
+`wcvpdata` provides a local R interface to the **World Checklist of
+Vascular Plants (WCVP)**, a comprehensive global database of accepted
+plant names and their synonyms maintained by the Royal Botanic Gardens,
+Kew. This package bundles standardized snapshots of the WCVP taxonomic
+and geographic distribution data (Version 15, January 2026), enabling
+large-scale botanical research and biodiversity analysis directly in R —
+without requiring repeated downloads or internet access.
+
+<invoke name="25-1">The WCVP database was initiated in 1988 by Rafaël
+Govaerts and has grown into an **international collaborative programme**
+with editors, compilers, and reviewers from around the globe.
 
 ## Installation
 
@@ -20,6 +33,14 @@ You can install the latest development version of wcvpdata from
 ``` r
 # install.packages("pak")
 pak::pak("PaulESantos/wcvpdata")
+
+# From r-universe
+install.packages("wcvpdata",
+  repos = c(
+    "https://paulesantos.r-universe.dev",
+    "https://cloud.r-project.org"
+  )
+)
 ```
 
 ## Citation
@@ -30,5 +51,38 @@ and the paper describing WCVP.
 You can find out how to cite these by running:
 
 ``` r
-citation("wcvpdata")
+print(citation("wcvpdata"), bibtex=TRUE)
+#> wcvpdata redistributes snapshots of the WCVP database. We, therefore,
+#> encourage you to cite the snapshot version and the WCVP data paper:
+#> 
+#>   Govaerts R (ed.). 2026. WCVP: World Checklist of Vascular Plants.
+#>   Facilitated by the Royal Botanic Gardens, Kew.
+#>   https://doi.org/10.34885/nswv-8994 [v15 accessed 06 Jan 2026].
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {WCVP: World Checklist of Vascular Plants. Facilitated by the Royal Botanic Gardens, Kew.},
+#>     author = {Rafa"{e}l Govaerts},
+#>     year = {2026},
+#>     note = {version 15, accessed 06 Jan 2026},
+#>     doi = {10.34885/nswv-8994},
+#>   }
+#> 
+#> Govaerts, R., Nic Lughadha, E. et al. The World Checklist of Vascular
+#> Plants, a continuously updated resource for exploring global plant
+#> diversity. Sci Data 8, 215 (2021).
+#> https://doi.org/10.1038/s41597-021-00997-6
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Article{,
+#>     title = {The World Checklist of Vascular Plants, a continuously updated resource for exploring global plant diversity},
+#>     author = {Rafa"{e}l Govaerts and Eimear Nic Lughadha and Nicholas Black and Robert Turner and Alan Paton},
+#>     journal = {Scientific Data},
+#>     year = {2021},
+#>     volume = {8},
+#>     number = {215},
+#>     doi = {10.1038/s41597-021-00997-6},
+#>   }
 ```
