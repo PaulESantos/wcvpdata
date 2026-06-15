@@ -1,5 +1,6 @@
 # wcvpdata 0.5.0
 
+* Updated bundled WCVP database to Version 16 (June 2026).
 * Prepared package for CRAN submission.
 * Added `@return` documentation to all exported functions.
 * Added `@examples` to all exported datasets.

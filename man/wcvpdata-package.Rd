@@ -6,7 +6,7 @@
 \alias{wcvpdata-package}
 \title{wcvpdata: World Checklist of Vascular Plants Data}
 \description{
-Provides a local interface to the 'World Checklist of Vascular Plants' (WCVP) \url{https://powo.science.kew.org/about-wcvp} (Version 15, January 2026), sourced from 'Plants of the World Online' \url{https://powo.science.kew.org/}. Bundles standardized snapshots of global taxonomic and geographic distribution data for vascular plants, designed to support large-scale botanical research and biodiversity analysis directly in 'R'.
+Provides a local interface to the 'World Checklist of Vascular Plants' (WCVP) \url{https://powo.science.kew.org/about-wcvp} (Version 16, June 2026), sourced from 'Plants of the World Online' \url{https://powo.science.kew.org/}. Bundles standardized snapshots of global taxonomic and geographic distribution data for vascular plants, designed to support large-scale botanical research and biodiversity analysis directly in 'R'.
 }
 \seealso{
 Useful links:
@@ -18,6 +18,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Paul E. Santos Andrade \email{paulefrens@gmail.com} (\href{https://orcid.org/0000-0002-6635-0375}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Paul E. Santos Andrade \email{paulefrens@gmail.com} (\href{https://orcid.org/0000-0002-6635-0375}{ORCID}) [copyright holder]
+}
 
 }
 \keyword{internal}

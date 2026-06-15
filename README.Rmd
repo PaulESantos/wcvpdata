@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 Vascular Plants (WCVP)**, a comprehensive global database of accepted
 plant names and their synonyms maintained by the Royal Botanic Gardens,
 Kew. This package bundles standardized snapshots of the WCVP taxonomic
-and geographic distribution data (Version 15, January 2026), enabling
+and geographic distribution data (Version 16, June 2026), enabling
 large-scale botanical research and biodiversity analysis directly in R
 — without requiring repeated downloads or internet access.
 

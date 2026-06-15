@@ -17,7 +17,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 Vascular Plants (WCVP)**, a comprehensive global database of accepted
 plant names and their synonyms maintained by the Royal Botanic Gardens,
 Kew. This package bundles standardized snapshots of the WCVP taxonomic
-and geographic distribution data (Version 15, January 2026), enabling
+and geographic distribution data (Version 16, June 2026), enabling
 large-scale botanical research and biodiversity analysis directly in R —
 without requiring repeated downloads or internet access.
 
@@ -57,7 +57,7 @@ print(citation("wcvpdata"), bibtex=TRUE)
 #> 
 #>   Govaerts R (ed.). 2026. WCVP: World Checklist of Vascular Plants.
 #>   Facilitated by the Royal Botanic Gardens, Kew.
-#>   https://doi.org/10.34885/nswv-8994 [v15 accessed 06 Jan 2026].
+#>   https://doi.org/10.34885/egs6-cp24 [v16 accessed 04 Jun 2026].
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -65,8 +65,8 @@ print(citation("wcvpdata"), bibtex=TRUE)
 #>     title = {WCVP: World Checklist of Vascular Plants. Facilitated by the Royal Botanic Gardens, Kew.},
 #>     author = {Rafa"{e}l Govaerts},
 #>     year = {2026},
-#>     note = {version 15, accessed 06 Jan 2026},
-#>     doi = {10.34885/nswv-8994},
+#>     note = {version 16, accessed 04 Jun 2026},
+#>     doi = {10.34885/egs6-cp24},
 #>   }
 #> 
 #> Govaerts, R., Nic Lughadha, E. et al. The World Checklist of Vascular

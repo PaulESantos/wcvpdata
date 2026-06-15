@@ -49,7 +49,7 @@ utils::unzip(temp, exdir = exdir)
 
 # load and save the names file
 cli_alert_info("Processing names data...")
-ruta <- "D:\\wcvp_data\\wcvp_15\\wcvp\\wcvp_names.csv"
+ruta <- "D:\\wcvp_data\\wcvp_16\\wcvp\\wcvp_names.csv"
 wcvp_checklist_names <- read_delim(ruta, #"wcvp-files/wcvp_names.csv",
                                    delim="|",
                                    quote="",
@@ -62,7 +62,7 @@ usethis::use_data(wcvp_checklist_names,
 
 # load and save the distributions file
 cli_alert_info("Processing distribution data...")
-ruta <- "D:\\wcvp_data\\wcvp_15\\wcvp\\wcvp_distribution.csv"
+ruta <- "D:\\wcvp_data\\wcvp_16\\wcvp\\wcvp_distribution.csv"
 wcvp_checklist_distribution <- read_delim(ruta, #"wcvp-files/wcvp_distribution.csv",
                                           delim = "|",
                                           quote = "",
@@ -75,8 +75,9 @@ usethis::use_data(wcvp_checklist_distribution,
 # extract metadata ----
 cli_alert_info("Extracting metadata...")
 # get info from README spreadsheet
-readme_path <- "D:\\wcvp_data\\wcvp_15\\wcvp\\README_WCVP.xlsx"#"wcvp-files/README_WCVP.xlsx"
-version <- read_xlsx(readme_path, range="A7", col_names="version")$version
+readme_path <- "D:\\wcvp_data\\wcvp_16\\wcvp\\README_WCVP.xlsx"#"wcvp-files/README_WCVP.xlsx"
+
+version <- read_xlsx(readme_path, range="A9", col_names="version")$version
 version <- str_extract(version, "\\d+")
 version
 
@@ -118,7 +119,7 @@ cli_alert_success("Metadata updated: Version {version} ({upload_date})")
 cli_alert_info("Updating citation file hooks...")
 citation_file <- "inst/CITATION"
 citation_text <- readLines(citation_file)
-
+citation_text
 # Robust anchor-based update for bibentry format
 # snapshot_date <- '...'
 i_date <- which(str_detect(citation_text, "^snapshot_date <-"))

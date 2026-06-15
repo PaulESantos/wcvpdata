@@ -3,7 +3,7 @@
 This is the first submission of 'wcvpdata' to CRAN.
 
 ## Test environments
-* local Windows installation, R 4.4.0 (pre-recorded)
+* local Windows installation, R 4.6.0
 * ubuntu-latest (on GitHub Actions), R-release, R-devel, R-oldrel
 
 ## R CMD check results

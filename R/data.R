@@ -2,17 +2,21 @@
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' A dataset containing the taxonomic data from the WCVP (Version 15, extracted Jan 2026).
+#' A dataset containing the taxonomic data from the WCVP (Version 16, extracted Jun 2026).
 #'
-#' @format A data frame with 1,442,392 rows and 31 variables:
+#' @format A data frame with 1,448,984 rows and 31 variables:
 #' \describe{
 #'   \item{plant_name_id}{World Checklist of Vascular Plants (WCVP) identifier}
 #'   \item{ipni_id}{International Plant Name Index (IPNI) identifier. Missing
-#'   values indicate that the name has not been matched with a name in IPNI.}
+#'   values indicate that the name has not been matched with a name in IPNI or
+#'   is missing from IPNI.}
 #'   \item{taxon_rank}{The level in the taxonomic hierarchy where the taxon
-#'   nname fits. Some infraspecific names are unranked and will have no value
-#'   iin this column.}
-#'   \item{taxon_status}{Indication of taxonomic opinion re the name.}
+#'   name fits. Some infraspecific names are unranked and will have no value
+#'   in this column.}
+#'   \item{taxon_status}{Indication of nomenclatural status and taxonomic opinion
+#'   re the name; see details in main text. Names with status 'Provisionally
+#'   Accepted' are unplaced names that have synonyms, following the GBIF
+#'   classification and are used within the Darwin Core Archive file.}
 #'   \item{family}{The name of the family to which the taxon belongs. (The
 #'   highest rank at which names are presented in WCVP).}
 #'   \item{genus_hybrid}{Indication of hybrid status at genus level:
@@ -32,9 +36,9 @@
 #'   name is at species rank or higher.}
 #'   \item{parenthetical_author}{The author of the basionym. Empty when there is no basionym.}
 #'   \item{primary_author}{The author or authors who published the scientific name. Missing values indicate instances where authorship is non-applicable (e.g. autonyms) or unknown.}
-#'   \item{publication_author}{The author or authors of the book where the scientific name is first published, who are different from the primary author. Missing values indicate instances where the primary author is also the author of the book or non-applicable (e.g. autonyms).}
+#'   \item{publication_author}{The author or authors of the book where the scientific name is first published, when different from the primary author. Missing values indicate instances where the primary author is also the author of the book or non-applicable (e.g. autonyms).}
 #'   \item{place_of_publication}{The journal, book or other publication in which the taxon name was effectively published. Missing values indicate instances where publication details are unknown or non-applicable (e.g. for autonyms). Abbreviated for brevity.}
-#'   \item{volume_and_page}{The volume and page numbers of the original publication of the taxon name, where "5(6): 36" is volume 5, issue 6, page 36. Missing values indicate instances where publication details are unknown or non-applicable (e.g. for autonyms). Not all records include issue number.}
+#'   \item{volume_and_page}{The volume and page numbers of the original publication of the taxon name, where "5(9): 36" is volume 5, issue 9, page 36. Missing values indicate instances where publication details are unknown or non-applicable (e.g. autonyms). Not all volumes include issue number.}
 #'   \item{first_published}{The year of publication of the name, enclosed in parentheses. Missing values indicate instances where publication details are unknown or non-applicable (e.g. for autonyms).}
 #'   \item{nomenclatural_remarks}{Remarks on the nomenclature. Preceded by a comma and space (", ") for easy concatenation.}
 #'   \item{geographic_area}{The geographic distribution of the taxon (for names of species rank or below): a generalised statement in narrative form. See \url{https://powo.science.kew.org/about-distribution#geography} for details.}
@@ -48,11 +52,16 @@
 #'   non-applicable (e.g. autonyms). }
 #'   \item{accepted_plant_name_id}{The ID of the accepted name of this taxon. Where the taxon_status is "Accepted", this will be identical to the plant_name_id value. Maybe empty if taxon status is unplaced, illegitimate, or in some cases where the accepted name is not a vascular plant (e.g. a moss, alga or animal).}
 #'   \item{basionym_plant_name_id}{ID of the original name that taxon_name was
-#'   derived from (i.e. the basionym). Empty if there have been no name changes.}
+#'   derived from (i.e. the basionym) if there has been a basionym. If there is a
+#'   replaced synonym author it is replaced synonym. Empty if there have been no
+#'   name changes.}
 #'   \item{replaced_synonym_author}{The author or authors responsible for
 #'   publication of the replaced synonym. Empty when the name is not a
 #'   replacement name based on another name.}
-#'   \item{homotypic_synonym}{The synonym type - TRUE if homotypic synonym, otherwise NA. See more information, see the International Code of Nomenclature for algae, fungi and plants: \url{https://www.iapt-taxon.org/nomen/main.php}}
+#'   \item{homotypic_synonym}{The synonym type: TRUE if homotypic synonym,
+#'   otherwise NA. For more information, see the International Code of
+#'   Nomenclature for algae, fungi and plants:
+#'   \url{https://www.iapt-taxon.org/nomen/main.php}}
 #'   \item{parent_plant_name_id}{ID for the parent genus or parent species of an
 #'   accepted species or infraspecific name. Empty for non accepted names or
 #'   where the parent has not yet been calculated.}
@@ -80,19 +89,19 @@
 #' Biodiversity Information Standards (TDWG) World Geographical Scheme for
 #' Recording Plant Distributions (WGSRPD)
 #'
-#' @format A data frame with 1,990,342 rows and 11 variables:
+#' @format A data frame with 1,995,338 rows and 11 variables:
 #' \describe{
 #'   \item{plant_locality_id}{Sequential number.}
-#'   \item{plant_name_id}{WCVP Identifier, corresponding to the filed of the same name in checklist_names.txt.}
-#'   \item{continent_code_l1}{Numerical botanical continent code (TDWG level 1).}
-#'   \item{continent}{Botanical continent (TDWG Level 1). See \url{https://www.tdwg.org/standards/wgsrpd/} for details.}
-#'   \item{region_code_l2}{Numerical botanical region code (TDWG level 2).}
+#'   \item{plant_name_id}{WCVP Identifier, corresponding to the field of the same name in checklist_names.txt.}
+#'   \item{continent_code_l1}{Numeric botanical continent code (TDWG Level 1).}
+#'   \item{continent}{Continent name (TDWG Level 1). See \url{https://www.tdwg.org/standards/wgsrpd/} for details.}
+#'   \item{region_code_l2}{Numeric botanical region code (TDWG Level 2).}
 #'   \item{region}{Botanical region (TDWG Level 2). See \url{https://www.tdwg.org/standards/wgsrpd/} for details.}
-#'   \item{area_code_l3}{Numerical botanical area code (TDWG level 3).}
+#'   \item{area_code_l3}{Three letter botanical area code (TDWG Level 3). See \url{https://www.tdwg.org/standards/wgsrpd/} for details.}
 #'   \item{area}{Botanical area (TDWG Level 3). See \url{https://www.tdwg.org/standards/wgsrpd/} for details.}
 #'   \item{introduced}{Introduced status of the taxon: 0 if native; 1 if introduced.}
 #'   \item{extinct}{Local extinction status of the taxon: 0 if extant; 1 if extinct in region.}
-#'   \item{location_doubtful}{Trustfulness of status: 1 if doubtfully present; else 0.}
+#'   \item{location_doubtful}{Doubtful status of taxon: 1 if doubtfully present, else 0.}
 #' }
 #' @source \url{http://sftp.kew.org/pub/data-repositories/WCVP/wcvp.zip}
 #' @examples
