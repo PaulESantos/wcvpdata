@@ -43,6 +43,44 @@ install.packages("wcvpdata",
 )
 ```
 
+## Usage
+
+Load the library:
+
+``` r
+library(wcvpdata)
+```
+
+### Checking the Database Version
+
+To see what version of the WCVP database is bundled with the package:
+
+``` r
+wcvp_version()
+#> Version 16 (04 Jun 2026)
+```
+
+You can check if the bundled version matches the latest one uploaded to
+the Kew SFTP server:
+
+``` r
+wcvp_check_version()
+#> ✔ WCVP data is up to date.
+#> ℹ Current version: Version 16 (04 Jun 2026), uploaded on "2026-06-04".
+```
+
+### Validating Local Data Integrity
+
+To verify that the locally installed datasets are complete and match the
+expected package metadata dimensions:
+
+``` r
+wcvp_validate_data()
+#> ✔ Local WCVP data validation successful.
+#> ℹ Names dataset: 1448984 rows, 31 columns.
+#> ℹ Distribution dataset: 1995338 rows, 11 columns.
+```
+
 ## Citation
 
 If you use wcvpdata, please cite the snapshot of the database you used
