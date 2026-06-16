@@ -27,4 +27,4 @@ wcvp_inform_startup <- function(msg) {
     packageStartupMessage(msg)
 }
 
-utils::globalVariables("metadata")
+utils::globalVariables(c("metadata", "wcvp_checklist_names", "wcvp_checklist_distribution"))

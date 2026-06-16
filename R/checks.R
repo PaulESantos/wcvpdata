@@ -64,3 +64,77 @@ wcvp_check_version <- function(silent = FALSE) {
   }
   invisible(up_to_date)
 }
+
+
+#' Validate the local WCVP data against package metadata.
+#'
+#' `r lifecycle::badge("stable")`
+#'
+#' This function checks if the loaded local datasets (`wcvp_checklist_names` and
+#' `wcvp_checklist_distribution`) match the dimensions specified in the package
+#' metadata and satisfy basic integrity constraints.
+#'
+#' @param names A data frame containing WCVP names. Defaults to the package's bundled dataset.
+#' @param distribution A data frame containing WCVP distributions. Defaults to the package's bundled dataset.
+#' @param silent Suppress all messages and warnings.
+#'
+#' @return A logical value; `TRUE` if the local data matches the metadata and
+#'   satisfies integrity checks, `FALSE` otherwise.
+#'
+#' @importFrom cli cli_warn cli_inform
+#' @export
+#'
+#' @examples
+#' wcvp_validate_data()
+#'
+wcvp_validate_data <- function(names = wcvp_checklist_names,
+                               distribution = wcvp_checklist_distribution,
+                               silent = FALSE) {
+  names_loaded <- tryCatch({
+    is.data.frame(names)
+  }, error = function(e) FALSE)
+
+  dist_loaded <- tryCatch({
+    is.data.frame(distribution)
+  }, error = function(e) FALSE)
+
+  if (!names_loaded || !dist_loaded) {
+    if (!silent) {
+      cli::cli_warn("Local WCVP datasets are not loaded or available.")
+    }
+    return(FALSE)
+  }
+
+  names_ok <- nrow(names) == metadata$name_rows &&
+    ncol(names) == metadata$name_col
+
+  dist_ok <- nrow(distribution) == metadata$dist_rows &&
+    ncol(distribution) == metadata$dist_col
+
+  ref_ok <- all(distribution$plant_name_id %in% names$plant_name_id)
+
+  all_ok <- names_ok && dist_ok && ref_ok
+
+  if (!silent) {
+    if (all_ok) {
+      cli::cli_inform(c(
+        "v" = "Local WCVP data validation successful.",
+        "i" = "Names dataset: {nrow(names)} rows, {ncol(names)} columns.",
+        "i" = "Distribution dataset: {nrow(distribution)} rows, {ncol(distribution)} columns."
+      ))
+    } else {
+      if (!names_ok) {
+        cli::cli_warn("Names dataset dimensions mismatch metadata expected values ({metadata$name_rows}x{metadata$name_col}).")
+      }
+      if (!dist_ok) {
+        cli::cli_warn("Distribution dataset dimensions mismatch metadata expected values ({metadata$dist_rows}x{metadata$dist_col}).")
+      }
+      if (!ref_ok) {
+        cli::cli_warn("Referential integrity check failed: some distribution records reference invalid plant_name_id values.")
+      }
+    }
+  }
+
+  invisible(all_ok)
+}
+
