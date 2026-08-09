@@ -47,35 +47,58 @@ cli_alert_success("Zip file downloaded and verified.")
 
 utils::unzip(temp, exdir = exdir)
 
-# load and save the names file
+# load and write specialized Parquet tables
 cli_alert_info("Processing names data...")
-ruta <- "D:\\wcvp_data\\wcvp_16\\wcvp\\wcvp_names.csv"
+source_dir <- Sys.getenv("WCVP_SOURCE_DIR", "D:/wcvp_data/wcvp_16/wcvp")
+ruta <- file.path(source_dir, "wcvp_names.csv")
 wcvp_checklist_names <- read_delim(ruta, #"wcvp-files/wcvp_names.csv",
                                    delim="|",
                                    quote="",
                                    show_col_types = FALSE)
-wcvp_checklist_names
+dir.create("inst/extdata", recursive = TRUE, showWarnings = FALSE)
 
-usethis::use_data(wcvp_checklist_names,
-                  compress = "xz",
-                  overwrite = TRUE)
+matching_columns <- c(
+  "plant_name_id", "taxon_rank", "taxon_status", "family", "genus",
+  "species", "infraspecific_rank", "infraspecies", "taxon_name",
+  "taxon_authors", "accepted_plant_name_id", "parent_plant_name_id"
+)
+synonym_columns <- c(
+  "plant_name_id", "accepted_plant_name_id", "taxon_name", "taxon_authors",
+  "taxon_status", "homotypic_synonym", "basionym_plant_name_id"
+)
+distribution_name_columns <- c(
+  "plant_name_id", "accepted_plant_name_id", "family", "genus", "species"
+)
+
+arrow::write_parquet(
+  wcvp_checklist_names[, matching_columns],
+  "inst/extdata/wcvp_matching_names.parquet", compression = "zstd"
+)
+arrow::write_parquet(
+  wcvp_checklist_names[, synonym_columns],
+  "inst/extdata/wcvp_synonym_index.parquet", compression = "zstd"
+)
+arrow::write_parquet(
+  wcvp_checklist_names[, distribution_name_columns],
+  "inst/extdata/wcvp_distribution_names.parquet", compression = "zstd"
+)
 
 # load and save the distributions file
 cli_alert_info("Processing distribution data...")
-ruta <- "D:\\wcvp_data\\wcvp_16\\wcvp\\wcvp_distribution.csv"
+ruta <- file.path(source_dir, "wcvp_distribution.csv")
 wcvp_checklist_distribution <- read_delim(ruta, #"wcvp-files/wcvp_distribution.csv",
                                           delim = "|",
                                           quote = "",
                                           show_col_types = FALSE)
-wcvp_checklist_distribution
-usethis::use_data(wcvp_checklist_distribution,
-                  compress = "xz",
-                  overwrite = TRUE)
+arrow::write_parquet(
+  wcvp_checklist_distribution,
+  "inst/extdata/wcvp_distribution.parquet", compression = "zstd"
+)
 
 # extract metadata ----
 cli_alert_info("Extracting metadata...")
 # get info from README spreadsheet
-readme_path <- "D:\\wcvp_data\\wcvp_16\\wcvp\\README_WCVP.xlsx"#"wcvp-files/README_WCVP.xlsx"
+readme_path <- file.path(source_dir, "README_WCVP.xlsx")
 
 version <- read_xlsx(readme_path, range="A9", col_names="version")$version
 version <- str_extract(version, "\\d+")

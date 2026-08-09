@@ -51,6 +51,23 @@ Load the library:
 library(wcvpdata)
 ```
 
+### Querying the packaged data
+
+WCVP data is stored as Zstandard-compressed Parquet files. The accessors return
+a lazy Arrow dataset by default, so a query reads only the columns and rows it
+needs:
+
+``` r
+wcvp_matching_names() |>
+  dplyr::filter(genus == "Solanum") |>
+  dplyr::select(plant_name_id, taxon_name, taxon_status) |>
+  dplyr::collect()
+```
+
+Use `as_data_frame = TRUE` only when a materialized R object is needed. The
+other packaged datasets are `wcvp_synonym_index()`,
+`wcvp_distribution_names()`, and `wcvp_distribution()`.
+
 ### Checking the Database Version
 
 To see what version of the WCVP database is bundled with the package:
@@ -77,8 +94,8 @@ expected package metadata dimensions:
 ``` r
 wcvp_validate_data()
 #> ✔ Local WCVP data validation successful.
-#> ℹ Names dataset: 1448984 rows, 31 columns.
-#> ℹ Distribution dataset: 1995338 rows, 11 columns.
+#> ℹ Names dataset: 1448984 rows, 1 column.
+#> ℹ Distribution dataset: 1995338 rows, 1 column.
 ```
 
 ## Citation

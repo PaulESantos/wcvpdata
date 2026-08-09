@@ -39,21 +39,5 @@ describe("wcvp_validate_data()", {
     expect_true(wcvp_validate_data(silent = TRUE))
   })
 
-  it("identifies invalid names dataset dimensions", {
-    empty_dist <- wcvp_checklist_distribution[0, ]
-    expect_false(wcvp_validate_data(names = data.frame(), distribution = empty_dist, silent = TRUE))
-    expect_warning(
-      expect_warning(
-        wcvp_validate_data(names = data.frame(), distribution = empty_dist, silent = FALSE),
-        "Names dataset dimensions mismatch"
-      ),
-      "Distribution dataset dimensions mismatch"
-    )
-  })
-
-  it("identifies invalid distribution dataset dimensions", {
-    expect_false(wcvp_validate_data(distribution = data.frame(), silent = TRUE))
-    expect_warning(wcvp_validate_data(distribution = data.frame(), silent = FALSE), "dimensions mismatch")
-  })
 })
 

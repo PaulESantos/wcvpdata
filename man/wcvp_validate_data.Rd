@@ -4,17 +4,9 @@
 \alias{wcvp_validate_data}
 \title{Validate the local WCVP data against package metadata.}
 \usage{
-wcvp_validate_data(
-  names = wcvp_checklist_names,
-  distribution = wcvp_checklist_distribution,
-  silent = FALSE
-)
+wcvp_validate_data(silent = FALSE)
 }
 \arguments{
-\item{names}{A data frame containing WCVP names. Defaults to the package's bundled dataset.}
-
-\item{distribution}{A data frame containing WCVP distributions. Defaults to the package's bundled dataset.}
-
 \item{silent}{Suppress all messages and warnings.}
 }
 \value{
@@ -25,9 +17,8 @@ satisfies integrity checks, \code{FALSE} otherwise.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
-This function checks if the loaded local datasets (\code{wcvp_checklist_names} and
-\code{wcvp_checklist_distribution}) match the dimensions specified in the package
-metadata and satisfy basic integrity constraints.
+This function checks the bundled Parquet tables against package metadata and
+basic integrity constraints. It materializes identifier columns only.
 }
 \examples{
 wcvp_validate_data()
