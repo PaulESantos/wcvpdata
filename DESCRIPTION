@@ -1,7 +1,7 @@
 Package: wcvpdata
 Type: Package
 Title: World Checklist of Vascular Plants Data
-Version: 0.5.1
+Version: 0.7.0
 Authors@R: c(person(given = "Paul E.",
                     family = "Santos Andrade",
                     role = c("aut", "cre", "cph"),
@@ -17,11 +17,10 @@ Description: Provides a local interface to the 'World Checklist of Vascular
     directly in 'R'.
 License: GPL (>= 3)
 Encoding: UTF-8
-LazyData: true
-LazyDataCompression: xz
 Depends:
     R (>= 4.1)
 Imports:
+    arrow,
     cli,
     curl,
     glue,

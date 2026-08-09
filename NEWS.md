@@ -1,3 +1,17 @@
+# wcvpdata 0.7.0
+
+# wcvpdata 0.6.0
+
+* Replaced lazy-loaded `.rda` datasets with Zstandard-compressed Parquet
+  tables for matching, synonyms, taxonomic distribution joins, and geographic
+  distributions.
+* Added lazy Arrow accessors: `wcvp_matching_names()`,
+  `wcvp_synonym_index()`, `wcvp_distribution_names()`,
+  `wcvp_distribution()`, and `wcvp_open_dataset()`.
+* Removed the legacy `wcvp_checklist_names` and
+  `wcvp_checklist_distribution` objects. Code using those objects must migrate
+  to the new accessors.
+
 # wcvpdata 0.5.1
 
 * Added `wcvp_validate_data()` to validate the local bundled WCVP dataset dimensions and referential integrity.
