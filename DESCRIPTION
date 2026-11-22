@@ -27,7 +27,8 @@ Imports:
     httr,
     lifecycle,
     rvest,
-    stringr
+    stringr,
+    tidyselect
 Suggests:
     testthat (>= 3.3.2),
     withr
@@ -35,4 +36,4 @@ Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/PaulESantos/wcvpdata
 BugReports: https://github.com/PaulESantos/wcvpdata/issues
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.1

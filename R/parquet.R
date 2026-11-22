@@ -21,7 +21,11 @@ wcvp_open_dataset <- function(table) {
 
 #' WCVP matching backbone
 #'
-#' A compact taxonomic backbone for matching plant names. Unlike the legacy
+#' A normalized taxonomic backbone for matching plant names. See
+#' [wcvp_matching_schema()] for the versioned normalization contract.
+#' Materialized results carry a `wcvpdata_matching_schema` attribute when
+#' the file declares a schema version. No normalization occurs during reads.
+#' Unlike the legacy
 #' lazy-data object, this reads no data until requested.
 #'
 #' @param as_data_frame If `FALSE` (the default), return a lazy Arrow Dataset.
@@ -84,5 +88,13 @@ wcvp_parquet_path <- function(table) {
 
 wcvp_read_table <- function(table, as_data_frame, columns) {
   if (!isTRUE(as_data_frame)) return(wcvp_open_dataset(table))
-  arrow::read_parquet(wcvp_parquet_path(table), col_select = columns)
+  out <- if (is.null(columns)) {
+    arrow::read_parquet(wcvp_parquet_path(table))
+  } else {
+    arrow::read_parquet(wcvp_parquet_path(table), col_select = tidyselect::all_of(columns))
+  }
+  if (identical(table, "matching_names")) {
+    attr(out, "wcvpdata_matching_schema") <- wcvp_matching_schema()
+  }
+  out
 }

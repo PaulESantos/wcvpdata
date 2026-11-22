@@ -24,7 +24,7 @@ cli_alert_info("Downloading latest WCVP data from {base_url}...")
 old_timeout <- getOption("timeout")
 options(timeout = max(600, old_timeout))
 
-# método más estable (evita .rs.downloadFile cuando sea posible)
+# mÃ©todo mÃ¡s estable (evita .rs.downloadFile cuando sea posible)
 method <- if (.Platform$OS.type == "windows") "wininet" else "curl"
 
 download.file(zip_url, destfile = temp, method = method, mode = "wb", quiet = TRUE)
@@ -70,8 +70,9 @@ distribution_name_columns <- c(
   "plant_name_id", "accepted_plant_name_id", "family", "genus", "species"
 )
 
+source("R/matching-schema.R")
 arrow::write_parquet(
-  wcvp_checklist_names[, matching_columns],
+  wcvp_matching_arrow_table(wcvp_checklist_names[, matching_columns]),
   "inst/extdata/wcvp_matching_names.parquet", compression = "zstd"
 )
 arrow::write_parquet(

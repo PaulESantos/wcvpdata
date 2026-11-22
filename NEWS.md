@@ -1,3 +1,14 @@
+# wcvpdata (development version)
+
+* Fix full-table reads with `columns = NULL` and use explicit column
+  selection for projected reads.
+* Normalize matching components at Parquet build time: squish whitespace,
+  replace empty components with missing values and canonicalize ranks.
+  Preserve row order, identifiers, names and authorship.
+* Add matching schema version 1 in Parquet metadata and the inexpensive
+  `wcvp_matching_schema()` accessor. Materialized tables carry the
+  `wcvpdata_matching_schema` attribute; reads do not normalize data.
+
 # wcvpdata 0.7.0
 
 # wcvpdata 0.6.0

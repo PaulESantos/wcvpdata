@@ -11,8 +11,10 @@ small companion is provided for release builds on hosts without R/arrow.
 from __future__ import annotations
 
 import argparse
+import re
 from pathlib import Path
 
+import pyarrow as pa
 import pyarrow.csv as csv
 import pyarrow.parquet as parquet
 
@@ -54,6 +56,30 @@ def read_table(path: Path, columns: list[str] | None):
     )
 
 
+def normalize_matching_names(table):
+    """Apply matching schema v1 without changing row order or other columns."""
+    aliases = {key: value for keys, value in [
+        (("SUBSP", "SUBSP.", "SSP", "SSP."), "SUBSP."),
+        (("VAR", "VAR."), "VAR."), (("SUBVAR", "SUBVAR."), "SUBVAR."),
+        (("F", "F.", "FO", "FO.", "FORM", "FORMA"), "F."),
+        (("SUBF", "SUBF."), "SUBF."),
+    ] for key in keys}
+    # Unicode White_Space matches stringr's ICU whitespace definition.
+    whitespace = re.compile(r"[\u0009-\u000d\u0020\u0085\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]+")
+    for name in ("genus", "species", "infraspecific_rank", "infraspecies"):
+        values = []
+        for value in table[name].to_pylist():
+            value = None if value is None else whitespace.sub(" ", str(value)).strip(" ") or None
+            if name == "infraspecific_rank" and value is not None:
+                value = value.upper()
+                value = aliases.get(value, value)
+            values.append(value)
+        table = table.set_column(table.schema.get_field_index(name), name, pa.array(values, type=pa.string()))
+    metadata = dict(table.schema.metadata or {})
+    metadata[b"wcvpdata.matching_schema_version"] = b"1"
+    return table.replace_schema_metadata(metadata)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source", type=Path, required=True)
@@ -63,6 +89,8 @@ def main() -> None:
 
     for output_name, (input_name, columns) in TABLES.items():
         table = read_table(args.source / input_name, columns)
+        if output_name == "wcvp_matching_names.parquet":
+            table = normalize_matching_names(table)
         output_path = args.output / output_name
         parquet.write_table(
             table,

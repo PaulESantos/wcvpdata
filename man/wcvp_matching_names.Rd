@@ -17,6 +17,10 @@ If \code{TRUE}, materialize the selected columns as a tibble.}
 An \code{arrow::Dataset} or a tibble.
 }
 \description{
-A compact taxonomic backbone for matching plant names. Unlike the legacy
+A normalized taxonomic backbone for matching plant names. See
+\code{\link[=wcvp_matching_schema]{wcvp_matching_schema()}} for the versioned normalization contract.
+Materialized results carry a \code{wcvpdata_matching_schema} attribute when
+the file declares a schema version. No normalization occurs during reads.
+Unlike the legacy
 lazy-data object, this reads no data until requested.
 }
